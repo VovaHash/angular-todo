@@ -10,6 +10,8 @@ export class TodosComponent implements OnInit {
 
   todos:Todo[] = [];
 
+  inputTodo:string = "";
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,9 +33,22 @@ export class TodosComponent implements OnInit {
   }
 
   toggleDone(id:number) : void{     
-    this.todos.map((v,i)=> {
-      if (i == id) v.completed = !v.completed;
+    this.todos.map((value,i)=> {
+      if (i == id) value.completed = !value.completed;
     })
+  }
+
+  deleteTodo(id : number) : void {
+    this.todos = this.todos.filter( (value, i) => i !==id );    // we will pass every todo that is not equal to 'id'
+  }
+
+  addTodo(){
+    this.todos.push({
+      content : this.inputTodo,
+      completed : false
+    })
+
+    this.inputTodo = '';
   }
 
 }
